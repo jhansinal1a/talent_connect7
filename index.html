@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>TalentConnect – University Network</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --uni-blue: #002855;
+      --uni-blue-dark: #001a36;
+      --uni-gold: #ffcc00;
+      --bg: #f9fafc;
+      --card: #ffffff;
+      --ink: #1f2430;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial;
+      color: var(--ink);
+      background: var(--bg);
+    }
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--uni-blue);
+      color: white;
+      border-bottom: 3px solid var(--uni-gold);
+      padding: 10px 0;
+      z-index: 50;
+    }
+    .head-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    /* logo */
+    .brand img.logo {
+      height: 50px; width: auto; display: block; object-fit: contain; background: transparent; border-radius: 0; padding: 0;
+    }
+    .brand-name { font-weight: 800; font-size: 1.4rem; color: white; letter-spacing: 0.5px; }
+    .tabs { display: flex; gap: 8px; }
+    .tab-btn {
+      background: transparent; border: 2px solid var(--uni-gold); color: var(--uni-gold);
+      font-weight: 600; border-radius: 8px; padding: 6px 12px; cursor: pointer; transition: 0.2s;
+    }
+    .tab-btn:hover, .tab-btn.active { background: var(--uni-gold); color: var(--uni-blue); }
+    /* Layout */
+    .container { max-width: 1200px; margin: 20px auto; padding: 0 20px; }
+    .grid { display: grid; gap: 20px; }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+      padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    h3.section-title { color: var(--uni-blue); font-weight: 800; margin-bottom: 10px; }
+    .muted { color: var(--muted); font-size: 14px; margin-bottom: 12px; }
+    label { font-weight: 600; font-size: 14px; margin-bottom: 5px; display: block; }
+    input, select, textarea {
+      width: 100%; border: 1px solid var(--line); border-radius: 8px; padding: 10px; font-size: 14px; margin-bottom: 10px; background: #fff;
+    }
+    textarea { min-height: 100px; }
+    .btn { display: inline-block; border: 2px solid transparent; padding: 10px 16px; font-weight: 700; border-radius: 8px; cursor: pointer; transition: 0.2s; }
+    .btn.primary { background: var(--uni-blue); color: white; border-color: var(--uni-blue); }
+    .btn.primary:hover { background: var(--uni-blue-dark); }
+    /* Profile preview */
+    .cover {
+      height: 140px; border-radius: 14px 14px 0 0; background: linear-gradient(135deg, var(--uni-blue), #305d91);
+    }
+    .profile-card { padding: 0; overflow: hidden; }
+    .prof-inner { padding: 20px; }
+    .avatar { width: 90px; height: 90px; border-radius: 50%; background: white; border: 3px solid var(--uni-gold);
+      display: grid; place-items: center; font-weight: 800; color: var(--uni-blue); font-size: 28px; margin-top: -45px; box-shadow: 0 2px 4px rgba(0,0,0,.1); }
+    /* photo for Chandler */
+    .avatar-img { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid var(--uni-gold); margin-top: -45px; box-shadow: 0 2px 4px rgba(0,0,0,.1); display:none; }
+    .name { font-size: 22px; font-weight: 800; margin-top: 10px; }
+    .title { color: var(--muted); font-size: 14px; }
+    ul { margin: 6px 0 0 16px; }
+    .footer { text-align: center; color: var(--muted); font-size: 12px; margin: 40px 0 20px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="head-inner">
+      <div class="brand">
+        <img class="logo" src="./logo.png" alt="TalentConnect logo" />
+        <div class="brand-name">TalentConnect</div>
+      </div>
+      <div class="tabs">
+        <button class="tab-btn active" id="tab-home">Home</button>
+        <button class="tab-btn" id="tab-directory" disabled>Directory</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="home">
+      <div class="grid grid-2">
+        <!-- Left side form (pre-filled with Chandler) -->
+        <div class="card">
+          <h3 class="section-title">Create / Edit Your Profile</h3>
+          <p class="muted">Your profile is updated live — just like LinkedIn.</p>
+
+          <label>Full Name</label>
+          <input id="fullName" value="Chandler" />
+
+          <label>Username / URL Slug</label>
+          <input id="slug" value="chandler" />
+
+          <label>Headline / Title</label>
+          <input id="headline" value="Configuration & Deployment Technician" />
+
+          <label>Status</label>
+          <select id="status">
+            <option>Student</option>
+            <option selected>Recent Graduate</option>
+            <option>Freelancer</option>
+            <option>Mid-Level</option>
+            <option>Senior</option>
+          </select>
+
+          <label>Expected Salary Range</label>
+          <input id="salary" value="$16/hr" />
+
+          <label>Short Bio</label>
+          <textarea id="bio">Hands-on technician with experience imaging, deploying, and validating Windows 10/11 devices. Detail-oriented with professional customer handoffs and lab upgrade experience.</textarea>
+
+          <label>Top 3 Projects (Title & Link)</label>
+          <textarea id="projects">Device Imaging Pipeline — prototype
+Self-service Laptop Enrollment — prototype
+Patch & Compliance Dashboard — prototype</textarea>
+
+          <label>Experience</label>
+          <textarea id="experience">GVSU IT — Technician — 2024 — Assisted with lab PC upgrades, device imaging, and handoffs
+Capstone — Endpoint Deployment — 2024 — Automated imaging using MDT and deployment scripts</textarea>
+
+          <label><input type="checkbox" id="freelancer" /> Freelancer</label>
+
+          <button class="btn primary" id="save">Save</button>
+        </div>
+
+        <!-- Right side live preview -->
+        <div class="card profile-card" id="preview">
+          <div class="cover"></div>
+          <div class="prof-inner">
+            <!-- Chandler photo will show here if chandler.jpg exists -->
+            <img id="pPhoto" class="avatar-img" src="chandler.jpg" alt="Chandler">
+            <div class="avatar" id="avatar">CH</div>
+            <div class="name" id="pName">Chandler</div>
+            <div class="title" id="pHeadline">Configuration & Deployment Technician</div>
+            <div><strong>Bio:</strong> <span id="pBio">Hands-on technician with experience imaging, deploying, and validating Windows 10/11 devices. Detail-oriented with professional customer handoffs and lab upgrade experience.</span></div>
+            <div><strong>Salary:</strong> <span id="pSalary">$16/hr</span></div>
+            <div><strong>Experience:</strong><ul id="pExp"></ul></div>
+            <div><strong>Projects:</strong><ul id="pProj"></ul></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="footer">© 2025 TalentConnect · University Network</div>
+
+  <script>
+    const $ = s => document.querySelector(s);
+
+    // If chandler.jpg loads, show it and hide initials
+    const img = $("#pPhoto");
+    img.addEventListener("load", () => { img.style.display = "block"; $("#avatar").style.display = "none"; });
+    img.addEventListener("error", () => { img.style.display = "none"; $("#avatar").style.display = "grid"; });
+
+    const update = () => {
+      $("#avatar").textContent = ($("#fullName").value || "TS")
+        .split(" ")
+        .map(w => w[0] || "")
+        .slice(0, 2)
+        .join("")
+        .toUpperCase();
+      $("#pName").textContent = $("#fullName").value || "Talent Student";
+      $("#pHeadline").textContent = $("#headline").value || "Your headline appears here";
+      $("#pBio").textContent = $("#bio").value || "Tell employers about yourself...";
+      $("#pSalary").textContent = $("#salary").value || "50k - 70k";
+      $("#pExp").innerHTML = ($("#experience").value || "")
+        .split("\n")
+        .filter(Boolean)
+        .map(e => `<li>${e}</li>`)
+        .join("") || "<li>—</li>";
+      $("#pProj").innerHTML = ($("#projects").value || "")
+        .split("\n")
+        .filter(Boolean)
+        .map(e => `<li>${e}</li>`)
+        .join("") || "<li>—</li>";
+    };
+
+    document.querySelectorAll("input,textarea,select").forEach(el => el.addEventListener("input", update));
+    // initial render with Chandler data
+    update();
+  </script>
+</body>
+</html>
